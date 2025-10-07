@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <Version>1.0.0</Version> <!-- Default version, overridden in pipeline -->
+        <Description>Ethernet/IP compatible library for .NET implementations.</Description>
+        <PackageReleaseNotes>Initial Release.</PackageReleaseNotes>
+        <PackageTags>EtherNetIP; CIP; EEIP; Port; .NETStandard</PackageTags>
+        <RootNamespace>Sres.Net.EEIP</RootNamespace>
+        <AssemblyName>EEIP.NetStandard</AssemblyName>
+        <OutputType>Library</OutputType>
+        <DebugType>embedded</DebugType>
+        <EmbedUntrackedSources>true</EmbedUntrackedSources>
+        <Title>EEIP.NetStandard</Title>
+        <Company>Blueprint Software; Rossman Engineering</Company>
+        <Authors>Ben Sampica (Blueprint Software); Rossman Engineering</Authors>
+        <PackageIcon>icon.png</PackageIcon>
+        <GenerateDocumentationFile>True</GenerateDocumentationFile>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(TF_BUILD)' == 'true'">
+        <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+    </PropertyGroup>
+    <ItemGroup>
+        <None Include="..\..\README.md">
+            <Pack>True</Pack>
+            <PackagePath>\</PackagePath>
+        </None>
+    </ItemGroup>
+</Project>

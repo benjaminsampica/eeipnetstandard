@@ -1,0 +1,58 @@
+name: Publish Blobs Worker to GitHub Packages
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '**/EEIP.NetStandard/**'
+  release:
+    types: [created]
+env:
+  project_name: "EEIP.NetStandard"
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.0.x'
+      - name: Build
+        run: |
+          dotnet restore
+          dotnet build
+  pack-and-publish:
+    if: startsWith(github.event.release.tag_name, 'blobs-v')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.0.x'
+      - name: Extract version from release tag
+        run: |
+          TAG_NAME="${{ github.event.release.tag_name }}"
+          VERSION="${TAG_NAME#blobs-v}"
+          [[ -z "$VERSION" || "$VERSION" == "$TAG_NAME" ]] && VERSION="1.0.0"
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+      - name: Pack NuGet package
+        run: |
+          dotnet restore
+          dotnet pack -c Release src/${{env.project_name}}/${{env.project_name}}.csproj -o nupkgs /p:Version=${{ env.VERSION }}
+      - name: Upload NuGet package as an artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: drop
+          path: nupkgs/*.nupkg
+      - name: Publish to NuGet.org
+        run: dotnet nuget push "nupkgs/*.nupkg" --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json

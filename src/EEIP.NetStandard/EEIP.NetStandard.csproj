@@ -5,6 +5,10 @@
         <Version>1.0.0</Version> <!-- Default version, overridden in pipeline -->
         <Description>Ethernet/IP compatible library for .NET implementations.</Description>
         <PackageReleaseNotes>Initial Release.</PackageReleaseNotes>
+        <PackageProjectUrl>https://github.com/benjaminsampica/eeipnetstandard</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/benjaminsampica/eeipnetstandard.git</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <PackageTags>EtherNetIP; CIP; EEIP; Port; .NETStandard</PackageTags>
         <RootNamespace>Sres.Net.EEIP</RootNamespace>
         <AssemblyName>EEIP.NetStandard</AssemblyName>

@@ -30,7 +30,7 @@ jobs:
           dotnet restore
           dotnet build
   pack-and-publish:
-    if: startsWith(github.event.release.tag_name, 'blobs-v')
+    if: startsWith(github.event.release.tag_name, 'v')
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository

@@ -14,7 +14,6 @@
         <Title>EEIP.NetStandard</Title>
         <Company>Blueprint Software; Rossman Engineering</Company>
         <Authors>Ben Sampica (Blueprint Software); Rossman Engineering</Authors>
-        <PackageIcon>icon.png</PackageIcon>
         <GenerateDocumentationFile>True</GenerateDocumentationFile>
         <PackageReadmeFile>README.md</PackageReadmeFile>
     </PropertyGroup>

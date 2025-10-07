@@ -1,4 +1,4 @@
-name: Publish Blobs Worker to GitHub Packages
+name: Publish Nuget
 
 on:
   push:
